@@ -1,0 +1,7 @@
+clear
+clc
+load('E:\Machine Learning\Final Project\kit\train\difference.mat');
+load('E:\Machine Learning\Final Project\kit\test\Ranked.mat');
+
+ranked_sorted=sort(ranked);
+differen

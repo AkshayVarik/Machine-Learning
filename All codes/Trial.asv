@@ -1,0 +1,3 @@
+load('words_train.mat')
+a=1
+A=
