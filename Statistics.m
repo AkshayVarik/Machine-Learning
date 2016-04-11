@@ -1,0 +1,54 @@
+clear
+clc
+load('E:\Machine Learning\Final Project\kit_latest\kit\train\train.mat');
+load('E:\Machine Learning\Final Project\kit_latest\kit\test\test.mat');
+
+net_training_sum=sum(words_train); % sum of all training words
+net_testing_sum=sum(words_test); % sum of all testing words
+net_training_zero=find(~net_training_sum); % indices of words whose sum is 0- never used, in training set
+net_training_nonzero=find(net_training_sum); % indices of words whose sum is non 0 in training set
+net_testing_zero=find(~net_testing_sum); % indices of words whose sum is 0- never used, in testing set
+net_testing_nonzero=find(net_testing_sum); % indices of words whose sum is non 0 in testing set
+% words_train=words_train(:,net_training_nonzero); % matrix of non zero training words
+% words_test=words_test(:,net_training_nonzero); % matrix of non zero testing words
+
+Female_indices=find(gender_train);
+Male_indices=find(~gender_train);
+
+words_train_male=words_train(Male_indices,:);
+words_train_female=words_train(Female_indices,:);
+
+words_train_male_count=sum(words_train_male);
+words_train_female_count=sum(words_train_female);
+
+% [words_train_male_count_sorted,words_train_male_rank]=sort(words_train_male_count);
+% [words_train_female_count_sorted,words_train_female_rank]=sort(words_train_female_count);
+
+Difference=words_train_female_count-words_train_male_count;
+Max_Difference=max(Difference);
+Min_Difference=min(Difference);
+
+y=[words_train_male_count' words_train_female_count' Difference'];
+bar(y)
+xlabel('Male/Female count and Difference');
+ylabel('Count');
+
+
+% % Mean=mean(Difference);
+% % Variance=var(Difference);
+% % Standard_Deviation=std(Difference);
+% % norm=normpdf(Difference,Mean,Standard_Deviation);
+% % bar(Difference)
+% 
+% % Keep_word_indices=find(Difference>=0 | Difference<0);
+% % Keep_word_indices=find(Difference(j,:)>10 | Difference(j,:)<-10);
+% % Removed_word_indices=find(Difference==0);
+% % Keep_word_train=words_train_train(:,Keep_word_indices);
+% % Keep_word_test=words_train_test(:,Keep_word_indices);
+% % words_test=words_test(:,Keep_word_indices);
+% 
+% Standard_Deviation=std(Difference,0,2);
+% Max_standard_deviation=max(Standard_Deviation);
+% Max_standard_deviation_index=find(Max_standard_deviation);
+% Chosen_Difference=Difference(Max_standard_deviation_index,:); %Chosen row of difference with maximum standard deviation
+
